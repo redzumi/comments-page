@@ -1,9 +1,13 @@
-import webpack 			          from 'webpack';
+import webpack                from 'webpack';
 import webpackMerge 	        from 'webpack-merge';
 
 import CompressionPlugin      from 'compression-webpack-plugin';
 import HtmlWebpackPlugin      from 'html-webpack-plugin';
 import ExtractTextPlugin      from 'extract-text-webpack-plugin';
+
+// TODO from config?
+const IP      = 'localhost';
+const PORT    = '3000';
 
 const isProd = (process.env.ENV == 'production');
 
@@ -20,7 +24,7 @@ const common = {
 
   output: {
     path: __dirname + '/build/service/web/assets',
-    publicPath: 'http://localhost:3000/assets'
+    publicPath: `http://${IP}:${PORT}/assets`
   },
 
   module: {
