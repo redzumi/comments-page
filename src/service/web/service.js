@@ -1,31 +1,28 @@
-import Koa                      from 'koa';
-import Router                   from 'koa-router';
-import send                     from 'koa-send';
+import path                      from 'path';
+import webpack                   from 'webpack';
+import express                   from 'express';
 
-const app             = new Koa();
-const router          = new Router();
+import webpackConfig             from '../../../webpack.config';
+
+import devMiddleware             from 'webpack-dev-middleware';
+import hotMiddleware             from 'webpack-hot-middleware';
 
 const PORT            = 3000;
 const isProd          = (process.env.ENV == 'production');
 
-app.use(async (ctx, next) => {
-  const start = new Date();
-  await next();
-  const ms = new Date() - start;
-  console.log(`${ctx.request.ip.replace(/^.*:/, '')} ${ctx.method} ${ctx.url} - ${ms}`);
-});
+const app             = express();
+const compiler        = webpack(webpackConfig);
 
-router.get('/assets*', (ctx) => {
-  if(isProd) ctx.set('Content-Encoding', 'gzip');
-  return send(ctx, ctx.path, { root: __dirname });
-});
+let enableHMR = () => {
+  app.use(devMiddleware(compiler, {
+    publicPath: webpackConfig.output.publicPath }));
+  app.use(hotMiddleware(compiler));
+};
 
-router.get('/*', async (ctx, next) => {
-  await next();
-  return send(ctx, 'index.html');
-});
+if(!isProd) enableHMR();
 
-app.use(router.routes());
-app.use(router.allowedMethods());
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
 
 app.listen(PORT);

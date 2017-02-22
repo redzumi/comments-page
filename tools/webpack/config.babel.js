@@ -37,7 +37,7 @@ const common = {
       },
       {
         test: /.jsx?$/,
-        loader: 'babel-loader',
+        loader: ['react-hot-loader', 'babel-loader'],
         exclude: /node_modules/
       },
       {
@@ -73,10 +73,16 @@ const common = {
 };
 
 let dev = webpackMerge(common, {
+  entry: {
+    'hmr': 'webpack-hot-middleware/client'
+  },
   output: {
     filename: '[name].js',
     chunkFilename: '[id].chunk.js'
-  }
+  },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin()
+  ]
 });
 
 let prod = webpackMerge(common, {

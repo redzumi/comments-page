@@ -130,3 +130,6 @@ jspm_packages
 
 ### Built files ###
 build
+
+### Built webpack config ###
+webpack.config.js
