@@ -2,14 +2,13 @@ import React                from 'react';
 
 import './styles.css';
 
-export default class Comment extends React.Component {
+export default class Comment extends React.PureComponent {
   render() {
-    const comment = this.props.comment;
     return (
       <div className="card comment-card">
         <div className="card-block">
-          <h4 className="card-title">{comment.name}</h4>
-          <p className="card-text">{comment.body}</p>
+          <h4 className="card-title">{this.props.comment.name}</h4>
+          <p className="card-text">{this.props.comment.body}</p>
         </div>
       </div>
     )

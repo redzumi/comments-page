@@ -18,19 +18,12 @@ export default class CommentsList extends React.Component {
   };
 
   render() {
-    let comments = [];
-    for(let i = this.state.offset; i <= this.state.limit - 1; i++) {
-      let comment = this.props.comments[i];
-      if(!comment) break;
-      comments.push(
-        <Comment comment={comment} key={comment.id}/>
-      );
-    }
     return (
       <div>
-        {(comments.length == 0)
-          ? <p>Тут пока ничего нет...</p>
-          : comments
+        { this.props.comments.slice(this.state.offset, this.state.limit)
+          .map((comment) => {
+            return <Comment comment={comment} key={comment.id}/>
+          })
         }
         <Pagination showPage={this.showCommentsFromPage}
                     pages={this.props.comments.length / MAX_COMMENTS}/>

@@ -14,9 +14,9 @@ export default class Pagination extends React.Component {
     this.props.showPage(currentPage);
   };
 
-  render() {
+  createPages = (count) => {
     let pages = [];
-    for(let i = 0; i <= this.props.pages; i++) {
+    for(let i = 0; i <= count; i++) {
       pages.push(
         <li className={`page-item ${(i == this.state.currentPage) ? 'active' : ''}`}
             key={`page-index-${i}`} data-index={i}
@@ -25,9 +25,13 @@ export default class Pagination extends React.Component {
         </li>
       );
     }
+    return pages;
+  };
+
+  render() {
     return (
       <ul className="pagination">
-        {pages}
+        {this.createPages(this.props.pages)}
       </ul>
     )
   }
