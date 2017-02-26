@@ -1,6 +1,6 @@
 import {
   NEW_COMMENT,
-  COMMENTS }     from '../../../common/constants/Comments';
+  SET_COMMENTS }     from '../../../common/constants/Comments';
 
 const initialState = [];
 
@@ -11,7 +11,7 @@ export default (state = initialState, action) => {
       return [...state, action.payload];
     }
 
-    case COMMENTS: {
+    case SET_COMMENTS: {
       return action.payload;
     }
 

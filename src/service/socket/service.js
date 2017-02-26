@@ -3,7 +3,7 @@ import uuid             from 'uuid/v1';
 import {
   ADD_COMMENT_RESULT,
   NEW_COMMENT,
-  COMMENTS }              from '../../common/constants/Comments';
+  SET_COMMENTS }        from '../../common/constants/Comments';
 
 const PORT          = 3001;
 const io            = socket.listen(PORT);
@@ -20,7 +20,7 @@ io.sockets.on('connection', (socket) => {
 
   //at first - sending comments from db
   console.log('sending comments from db: ' + db.length);
-  io.emit('action', { type: COMMENTS, payload: db });
+  io.emit('action', { type: SET_COMMENTS, payload: db });
 
   socket.on('add_comment', (data) => {
     data.id = uuid();
