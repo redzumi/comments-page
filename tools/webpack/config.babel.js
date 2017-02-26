@@ -15,8 +15,7 @@ console.log(`Production:  ${isProd}`);
 
 const common = {
   entry: {
-    'app': __dirname + '/src/service/web/index.js',
-    'vendors': __dirname + '/src/service/web/vendors.js'
+    'app': __dirname + '/src/service/web/index.js'
   },
 
   resolve: {
