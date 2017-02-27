@@ -1,7 +1,7 @@
 import React                from 'react';
 
 import Comment              from '../Comment';
-import Pagination           from '../Pagination';
+import Pagination           from '../../Pagination';
 
 const MAX_COMMENTS = 3;
 

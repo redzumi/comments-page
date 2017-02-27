@@ -1,7 +1,10 @@
 import React                  from 'react';
 import { UncontrolledAlert }  from 'reactstrap';
-import { Button, Form, FormGroup,
-  Label, Input, FormFeedback }    from 'reactstrap';
+import {
+  Button, Form,
+  FormGroup,
+  Label, Input,
+  FormFeedback }              from 'reactstrap';
 
 export default class CommentForm extends React.Component {
   constructor(props) {
@@ -31,6 +34,7 @@ export default class CommentForm extends React.Component {
     }
   };
 
+  //TODO better validation
   validateComment = (comment) => {
     if(comment.name.length < 3) {
       this.showTooltip('name', 'Минимальная длинна 3 символа');
@@ -66,7 +70,6 @@ export default class CommentForm extends React.Component {
     return (
       <Form onSubmit={this.handleComment}>
         {this.showAlert(this.props.form.result)}
-
         <FormGroup color={(this.state.tooltips.name) && 'danger'}>
           <Label>Ваше имя</Label>
           <Input type="text" name="name"

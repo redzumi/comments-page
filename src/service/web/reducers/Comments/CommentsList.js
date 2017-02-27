@@ -1,6 +1,6 @@
 import {
   NEW_COMMENT,
-  SET_COMMENTS }     from '../../../common/constants/Comments';
+  SET_COMMENTS }     from '../../../../common/constants/Comments';
 
 const initialState = [];
 

@@ -1,6 +1,6 @@
 import {
   ADD_COMMENT_REQUEST,
-  ADD_COMMENT_RESULT }     from '../../../common/constants/Comments';
+  ADD_COMMENT_RESULT }     from '../../../../common/constants/Comments';
 
 const initialState = {
   processing: false,

@@ -1,6 +1,8 @@
 import React                from 'react';
-
-import './styles.css';
+import {
+  Pagination as RSPagination,
+  PaginationItem,
+  PaginationLink }          from 'reactstrap';
 
 export default class Pagination extends React.Component {
   constructor(props) {
@@ -9,8 +11,11 @@ export default class Pagination extends React.Component {
   }
 
   updateCurrentPage = (event) => {
+    event.preventDefault();
+
     let currentPage = event.currentTarget.dataset.index;
     this.setState({ currentPage: currentPage });
+
     this.props.showPage(currentPage);
   };
 
@@ -18,11 +23,13 @@ export default class Pagination extends React.Component {
     let pages = [];
     for(let i = 0; i <= count; i++) {
       pages.push(
-        <li className={`page-item ${(i == this.state.currentPage) ? 'active' : ''}`}
-            key={`page-index-${i}`} data-index={i}
-            onClick={this.updateCurrentPage}>
-          <span className="page-link">{i + 1}</span>
-        </li>
+        <PaginationItem {...{active: (i == this.state.currentPage)}}
+            key={`page-index-${i}`}>
+          <PaginationLink href="#" data-index={i}
+                          onClick={this.updateCurrentPage}>
+            {i + 1}
+          </PaginationLink>
+        </PaginationItem>
       );
     }
     return pages;
@@ -30,9 +37,9 @@ export default class Pagination extends React.Component {
 
   render() {
     return (
-      <ul className="pagination">
+      <RSPagination>
         {this.createPages(this.props.pages)}
-      </ul>
+      </RSPagination>
     )
   }
 }
