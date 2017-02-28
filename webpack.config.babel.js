@@ -13,6 +13,8 @@ const isProd = (process.env.ENV == 'production');
 
 console.log(`Production:  ${isProd}`);
 
+console.log(this);
+
 const common = {
   entry: {
     'app': __dirname + '/src/service/web/index.js'

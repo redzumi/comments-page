@@ -2,7 +2,7 @@ import path                      from 'path';
 import webpack                   from 'webpack';
 import express                   from 'express';
 
-import webpackConfig             from '../../../webpack.config';
+import webpackConfig             from '../../../hmr.webpack.config';
 
 import devMiddleware             from 'webpack-dev-middleware';
 import hotMiddleware             from 'webpack-hot-middleware';

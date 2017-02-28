@@ -8,7 +8,7 @@
     "build:webservice": "babel src/service/web/service.js -o build/service/web/service.js",
     "prebuild:web": "rimraf build/service/web/assets",
     "build:web": "webpack",
-    "prestart:web": "babel tools/webpack/config.babel.js -o webpack.config.js",
+    "prestart:web": "babel webpack.config.babel.js -o hmr.webpack.config.js",
     "start:web": "cd build/service/web && node service.js"
   },
   "author": "Redzumi",
