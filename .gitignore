@@ -132,4 +132,4 @@ jspm_packages
 build
 
 ### Built webpack config ###
-webpack.config.js
+hmr.webpack.config.js

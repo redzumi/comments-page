@@ -1,19 +1,29 @@
 import webpack                from 'webpack';
 import webpackMerge 	        from 'webpack-merge';
 
-import CompressionPlugin      from 'compression-webpack-plugin';
 import HtmlWebpackPlugin      from 'html-webpack-plugin';
 import ExtractTextPlugin      from 'extract-text-webpack-plugin';
 
-// TODO from config?
-const IP      = 'localhost';
-const PORT    = '3000';
+//in future mb
+//webpack --env.ip localhost --env.port 3000 --env.prod true
+//with
+//export default (options) => { return {}; };
 
-const isProd = (process.env.ENV == 'production');
+//default
+let options = {
+  ip: 'localhost',
+  port: 3000,
+  prod: false
+};
+export { options };
+
+console.log(`Options:  ${JSON.stringify(options)}`);
+
+const IP      = options.ip;
+const PORT    = options.port;
+const isProd  = (options.prod == 'true' || options.prod);
 
 console.log(`Production:  ${isProd}`);
-
-console.log(this);
 
 const common = {
   entry: {
@@ -107,15 +117,8 @@ let prod = webpackMerge(common, {
         drop_console: true,
         unsafe      : true
       }
-    }),
-    new CompressionPlugin({
-      asset: "[path].gz[query]",
-      algorithm: "gzip",
-      test: /\.js$|\.html$/,
-      threshold: 10240,
-      minRatio: 0.8
     })
   ]
 });
 
-(isProd) ? module.exports = prod : module.exports = dev;
+export default (isProd) ? prod : dev;

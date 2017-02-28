@@ -1,14 +1,12 @@
-import path                      from 'path';
-import webpack                   from 'webpack';
-import express                   from 'express';
+import path                       from 'path';
+import webpack                    from 'webpack';
+import express                    from 'express';
+import compression                from 'compression';
 
-import webpackConfig             from '../../../hmr.webpack.config';
+import webpackConfig, { options } from '../../../hmr.webpack.config';
 
-import devMiddleware             from 'webpack-dev-middleware';
-import hotMiddleware             from 'webpack-hot-middleware';
-
-const PORT            = 3000;
-const isProd          = (process.env.ENV == 'production');
+import devMiddleware              from 'webpack-dev-middleware';
+import hotMiddleware              from 'webpack-hot-middleware';
 
 const app             = express();
 const compiler        = webpack(webpackConfig);
@@ -19,10 +17,12 @@ let enableHMR = () => {
   app.use(hotMiddleware(compiler));
 };
 
-if(!isProd) enableHMR();
+if(options.prod)  app.use(compression());
+if(!options.prod) enableHMR();
 
+app.use('/assets', express.static('assets'));
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-app.listen(PORT);
+app.listen(options.port);
