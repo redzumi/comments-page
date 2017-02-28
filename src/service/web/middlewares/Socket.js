@@ -38,7 +38,7 @@ export const socketIOMiddleware = ({ dispatch, getState }) => next => action => 
 };
 
 export const connectSocket = ({ dispatch }, host) => {
-  socket = io.connect(host);
+  socket = io.connect(host || 'http://localhost:3001');
 
   socket.on('action', action => {
     console.log('new action from socket: ' + JSON.stringify(action));

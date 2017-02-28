@@ -12,6 +12,7 @@ import ExtractTextPlugin      from 'extract-text-webpack-plugin';
 //default
 let options = {
   ip: 'localhost',
+  socket: 'http://localhost:3001',
   port: 3000,
   prod: false
 };
@@ -27,7 +28,8 @@ console.log(`Production:  ${isProd}`);
 
 const common = {
   entry: {
-    'app': __dirname + '/src/service/web/index.js'
+    'app': __dirname + '/src/service/web/index.js',
+    'vendors': __dirname + '/src/service/web/vendors.js'
   },
 
   resolve: {
@@ -65,6 +67,13 @@ const common = {
           fallbackLoader: 'style-loader',
           loader: 'css-loader!sass-loader'
         })
+      },
+      {
+        test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico|map)$/,
+        loader: 'file-loader',
+        query: {
+          name: '[name].[hash].[ext]'
+        }
       }
     ]
   },
@@ -74,7 +83,7 @@ const common = {
       name: ['app']
     }),
     new webpack.DefinePlugin({
-      'process.env.ENV': (isProd) ? '"production"' : '"development"'
+      'process.env.OPTIONS': `${JSON.stringify(options)}`
     }),
     new HtmlWebpackPlugin({
       template: __dirname + '/src/service/web/index.html',

@@ -2,6 +2,7 @@ import path                       from 'path';
 import webpack                    from 'webpack';
 import express                    from 'express';
 import compression                from 'compression';
+import morgan                     from 'morgan';
 
 import webpackConfig, { options } from '../../../hmr.webpack.config';
 
@@ -16,6 +17,9 @@ let enableHMR = () => {
     publicPath: webpackConfig.output.publicPath }));
   app.use(hotMiddleware(compiler));
 };
+
+//or combined
+app.use(morgan('tiny'));
 
 if(options.prod)  app.use(compression());
 if(!options.prod) enableHMR();

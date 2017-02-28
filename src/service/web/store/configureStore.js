@@ -20,7 +20,7 @@ const configureStore = (initialState) => {
     })
   }
 
-  connectSocket(store, 'http://localhost:3001');
+  connectSocket(store, process.env.OPTIONS.socket);
   return store;
 };
 
