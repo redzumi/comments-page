@@ -17,14 +17,19 @@ export default class CommentsList extends React.Component {
     this.setState({ offset: offset, limit: limit });
   };
 
+  renderComments = (comments) => {
+    if(comments.length == 0)
+      return <p>Тут пока ничего нет...</p>;
+    return comments.map((comment) => {
+        return <Comment comment={comment} key={comment.id}
+                        removeComment={this.props.removeComment}/>
+      })
+  };
+
   render() {
     return (
       <div>
-        { this.props.comments.slice(this.state.offset, this.state.limit)
-          .map((comment) => {
-            return <Comment comment={comment} key={comment.id}/>
-          })
-        }
+        { this.renderComments(this.props.comments.slice(this.state.offset, this.state.limit)) }
         <Pagination showPage={this.showCommentsFromPage}
                     pages={this.props.comments.length / MAX_COMMENTS}/>
       </div>

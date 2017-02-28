@@ -86,7 +86,9 @@ export default class CommentForm extends React.Component {
           <FormFeedback>{this.state.tooltips.body}</FormFeedback>
         </FormGroup>
 
-        <Button color="primary">Отправить</Button>
+        <Button color="primary" {...{disabled: (this.props.form.processing)}}>
+          {(this.props.form.processing) ? 'Обработка...' : 'Отправить'}
+        </Button>
       </Form>
     )
   }

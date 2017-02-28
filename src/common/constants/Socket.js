@@ -1,0 +1,2 @@
+export const GET_CLIENT_TOKEN   = 'GET_CLIENT_TOKEN';
+export const SET_CLIENT_TOKEN   = 'SET_CLIENT_TOKEN';

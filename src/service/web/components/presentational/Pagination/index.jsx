@@ -19,7 +19,7 @@ export default class Pagination extends React.Component {
     this.props.showPage(currentPage);
   };
 
-  createPages = (count) => {
+  renderPages = (count) => {
     let pages = [];
     for(let i = 0; i <= count; i++) {
       pages.push(
@@ -38,7 +38,7 @@ export default class Pagination extends React.Component {
   render() {
     return (
       <RSPagination>
-        {this.createPages(this.props.pages)}
+        {this.renderPages(this.props.pages)}
       </RSPagination>
     )
   }
